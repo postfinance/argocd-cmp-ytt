@@ -46,7 +46,6 @@ jobs:
           distribution: goreleaser
           version: latest
           args: release --rm-dist --snapshot
-          workdir: ./ytt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -96,6 +95,5 @@ jobs:
           distribution: goreleaser
           version: latest
           args: release --rm-dist
-          workdir: ./ytt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
