@@ -6,4 +6,3 @@ plugin](https://argo-cd.readthedocs.io/en/stable/user-guide/config-management-pl
 to to extend the manifest rendering capability of ArgoCD, for example to permit
 rendering and application `source:` with Google's `kpt`, with `ytt`, with
 `jsonnet`, or a combination of templating tools.
-

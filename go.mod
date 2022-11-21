@@ -1,4 +1,4 @@
-module argocd-cmp-ytt
+module argocd-cmp
 
 go 1.19
 
