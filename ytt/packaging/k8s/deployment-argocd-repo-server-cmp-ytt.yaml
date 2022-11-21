@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+spec:
+  template:
+    spec:
+      containers:
+        - name: argocd-cmp-ytt
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 999
+          image: postfinance/argocd-cmp-ytt:latest
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          env:
+            - name: HELM_CACHE_HOME
+              value: /helm-working-dir
+            - name: HELM_CONFIG_HOME
+              value: /helm-working-dir
+            - name: HELM_DATA_HOME
+              value: /helm-working-dir
+          volumeMounts:
+            - mountPath: /etc/ssl/certs/truststore.pem
+              name: truststore
+              subPath: truststore.pem
+              readOnly: true
+            - mountPath: /var/run/argocd
+              name: var-files
+            - mountPath: /home/argocd/cmp-server/plugins
+              name: plugins
+            - mountPath: /tmp
+              name: cmp-ytt-tmp
+            - mountPath: /helm-working-dir
+              name: helm-working-dir
+      volumes:
+        - emptyDir: {}
+          name: cmp-ytt-tmp
