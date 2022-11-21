@@ -52,13 +52,14 @@ jobs:
 
       - name: Push snapshot images
         run: |
-          docker image ls --format "{{.Repository}}:{{.Tag}}" | grep argocd-cmp-ytt | xargs -I{} docker push  '{}'
+          export TAG=$(echo $GITHUB_REF | cut -d "/" -f3)
+          docker image ls --format "{{.Repository}}:{{.Tag}}" | grep $GITHUB_REPOSITORY:$TAG | xargs -I{} docker push  '{}'
 
       - name: Create and push manifest for :snapshot tag
         run: |
-          docker image ls --format "{{.Repository}}:{{.Tag}}" | grep argocd-cmp-ytt | paste -sd ' ' /dev/stdin > images
-          docker manifest create postfinance/argocd-cmp-ytt:snapshot $(cat images)
-          docker manifest push postfinance/argocd-cmp-ytt:snapshot
+          docker image ls --format "{{.Repository}}:{{.Tag}}" | grep $GITHUB_REPOSITORY:$TAG | paste -sd ' ' /dev/stdin > images
+          docker manifest create $GITHUB_REPOSITORY:snapshot $(cat images)
+          docker manifest push $GITHUB_REPOSITORY:snapshot
 
   release:
     if: startsWith(github.ref, 'refs/tags/v')
