@@ -50,16 +50,15 @@ func renderHelmChart() {
 	}
 
 	// Helm Chart detected. we only apply ytt on values.yaml and then use helm to template
-	yttPipe := script.Exec("ytt --data-values-env=ARGOCD_ENV --file values.yaml --output-files .")
-	yttPipe.Wait()
-	err := yttPipe.Error()
+	stdout, err := script.Exec("ytt --data-values-env=ARGOCD_ENV --file values.yaml --output-files .").String()
 
 	if err != nil {
 		toDebug(fmt.Sprintf("#! cmp-ytt: an error occurred while rendering the ytt template: %v", err))
+		toDebug(stdout)
 		renderDebugAndExit()
 	}
 
-	stdout, err := script.Exec("helm dependency build").String()
+	stdout, err = script.Exec("helm dependency build").String()
 	if err != nil {
 		toDebug(fmt.Sprintf("#! cmp-ytt: error while pulling helm depencies: %v", err))
 		toDebug(stdout)
@@ -80,7 +79,7 @@ func renderKustomization() {
 	// Kustomization detected - we apply ytt on all files and then use kustomize build
 	stdout, err := script.Exec("ytt --data-values-env=ARGOCD_ENV --file . --output-files .").String()
 	if err != nil {
-		toDebug(fmt.Sprintf("#cmp-ytt: an error occurred while rendering the ytt template: %v", err))
+		toDebug(fmt.Sprintf("#! cmp-ytt: an error occurred while rendering the ytt template: %v", err))
 		toDebug(stdout)
 		renderDebugAndExit()
 	}
