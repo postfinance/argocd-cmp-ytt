@@ -3,7 +3,7 @@ FROM curlimages/curl as ytt-download
 ARG TARGETOS
 ARG TARGETARCH
 
-RUN curl --location --insecure https://github.com/vmware-tanzu/carvel-ytt/releases/download/v0.44.0/ytt-${TARGETOS}-${TARGETARCH} > /tmp/ytt
+RUN curl --location https://github.com/vmware-tanzu/carvel-ytt/releases/download/v0.44.0/ytt-${TARGETOS}-${TARGETARCH} -o /tmp/ytt
 
 FROM argoproj/argocd:v2.5.2
 USER root
