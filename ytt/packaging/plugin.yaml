@@ -1,0 +1,10 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ConfigManagementPlugin
+metadata:
+  name: cmp-ytt
+spec:
+  version: v1.0.0
+  generate:
+    command: ['/home/argocd/cmp-ytt']
+  discover:
+    fileName: ".ytt"
