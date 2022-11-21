@@ -1,6 +1,4 @@
 project_name: argocd-cmp-ytt
-release:
-  disable: true
 builds:
 - id: argocd-cmp-ytt
   goos:
