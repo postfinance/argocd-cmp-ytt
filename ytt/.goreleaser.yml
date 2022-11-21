@@ -1,4 +1,9 @@
 project_name: argocd-cmp-ytt
+release:
+  footer: |
+    ## Docker Images
+
+    - `postfinance/{{ .ProjectName }}:{{ .Version }}`
 builds:
 - id: argocd-cmp-ytt
   goos:
