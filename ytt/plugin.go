@@ -43,6 +43,11 @@ stringData:
 func renderHelmChart() {
 	appNs, _ := os.LookupEnv("ARGOCD_APP_NAMESPACE")
 	appName, _ := os.LookupEnv("ARGOCD_APP_NAME")
+	helmReleaseName, customReleaseDefined := os.LookupEnv("ARGOCD_ENV_HELM_RELEASE_NAME")
+
+	if customReleaseDefined {
+		appName = helmReleaseName
+	}
 
 	if appNs == "" {
 		toDebug("#! the namespace of the application isn't defined. not possible to render the Helm Chart without that.")
