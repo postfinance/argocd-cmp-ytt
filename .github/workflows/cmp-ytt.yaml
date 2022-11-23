@@ -54,8 +54,6 @@ jobs:
           docker image ls --format "{{.Repository}}:{{.Tag}}" | \
             grep -e "$GITHUB_REPOSITORY:.*$(git rev-parse --short HEAD).*" | \
             paste -sd ' ' /dev/stdin > images
-          echo "$GITHUB_REPOSITORY:.*$(git rev-parse --short HEAD).*"
-          cat images
 
       - name: Push snapshot images
         run: |
