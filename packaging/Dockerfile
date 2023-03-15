@@ -3,9 +3,9 @@ FROM curlimages/curl as ytt-download
 ARG TARGETOS
 ARG TARGETARCH
 
-RUN curl -k --location https://github.com/vmware-tanzu/carvel-ytt/releases/download/v0.44.0/ytt-${TARGETOS}-${TARGETARCH} -o /tmp/ytt
+RUN curl -k --location https://github.com/vmware-tanzu/carvel-ytt/releases/download/v0.45.0/ytt-${TARGETOS}-${TARGETARCH} -o /tmp/ytt
 
-FROM argoproj/argocd:v2.5.2
+FROM argoproj/argocd:v2.6.5
 USER root
 
 COPY --from=ytt-download /tmp/ytt /usr/local/bin/ytt
