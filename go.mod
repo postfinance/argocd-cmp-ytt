@@ -2,7 +2,7 @@ module argocd-cmp
 
 go 1.19
 
-require github.com/bitfield/script v0.21.3
+require github.com/bitfield/script v0.21.4
 
 require (
 	bitbucket.org/creachadair/shell v0.0.7 // indirect
