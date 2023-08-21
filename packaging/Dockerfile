@@ -5,7 +5,7 @@ ARG TARGETARCH
 
 RUN curl -k --location https://github.com/vmware-tanzu/carvel-ytt/releases/download/v0.45.0/ytt-${TARGETOS}-${TARGETARCH} -o /tmp/ytt
 
-FROM argoproj/argocd:v2.6.12
+FROM argoproj/argocd:v2.6.14
 USER root
 
 COPY --from=ytt-download /tmp/ytt /usr/local/bin/ytt
