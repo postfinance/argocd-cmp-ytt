@@ -1,5 +1,14 @@
 # ArgoCD `ytt` Config Management Plugin (CMP)
 
+This project was deprecated and replaced in favor of [`argocd-lovely-plugin`](https://github.com/crumbhole/argocd-lovely-plugin)
+
+Please check _lovely_ documentation, and more specifically the [`lovely-ytt` plugin variation doc](https://github.com/crumbhole/argocd-lovely-plugin/blob/main/doc/ytt.md)
+
+<details>
+<summary>Old readme</summary>
+<br>
+
+
 This repository contains an [ArgoCD configuration management
 plugin](https://argo-cd.readthedocs.io/en/stable/user-guide/config-management-plugins/)
 (CMP) for `ytt` which permits using [*YAML Templating Tookit*](https://carvel.dev/ytt/) to template YAML/manifests before they are applied by ArgoCD.
@@ -83,3 +92,7 @@ contour:
     - --xds-port=8001
     - --ingress-status-address={{ getHostByName "(@= data.values.ingress_name @)" }} # we can make a DNS lookup here!
 ```
+
+</details>
+
+
